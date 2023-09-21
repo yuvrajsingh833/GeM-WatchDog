@@ -34,7 +34,42 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    resultDiv.textContent = JSON.stringify(data, null, 2);
+                    resultDiv.innerHTML = "";
+
+                    const table = document.createElement("table");
+                    table.classList.add("product-table");
+
+                    const tableHeader = document.createElement("thead");
+                    const headerRow = document.createElement("tr");
+                    const headers = ["Name", "Price", "Rating", "Number of Ratings"];
+
+                    headers.forEach((headerText) => {
+                        const th = document.createElement("th");
+                        th.textContent = headerText;
+                        headerRow.appendChild(th);
+                    });
+
+                    tableHeader.appendChild(headerRow);
+                    table.appendChild(tableHeader);
+
+                    const tableBody = document.createElement("tbody");
+
+                    data.data.forEach((item) => {
+                        const row = document.createElement("tr");
+                        const keys = ["name", "price", "rating", "noOfRatings"];
+
+                        keys.forEach((key) => {
+                            const cell = document.createElement("td");
+                            cell.textContent = item[key];
+                            row.appendChild(cell);
+                        });
+
+                        tableBody.appendChild(row);
+                    });
+
+                    table.appendChild(tableBody);
+
+                    resultDiv.appendChild(table);
                 })
                 .catch((error) => {
                     console.error("Error:", error);
