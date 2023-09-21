@@ -1,8 +1,8 @@
 {
-    "extensionDescription": {
-        "message": "SIH 2023"
-    },
-    "otherMessageKey": {
-        "message": "Localized message for your extension"
-    }
+  "extensionDescription": {
+    "message": "SIH 2023"
+  },
+  "otherMessageKey": {
+    "message": "Localized message for your extension"
+  }
 }
