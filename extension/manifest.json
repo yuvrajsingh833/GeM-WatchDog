@@ -1,5 +1,25 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "name": "DOM Accessor",
+  "version": "1.0",
+  "description": "Access the DOM of the current page",
+  "host_permissions": ["https://mkp.gem.gov.in/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mkp.gem.gov.in/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": ["scripting"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  }
 }
