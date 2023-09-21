@@ -4,24 +4,19 @@
   "version": "1.0",
   "description": "SIH 2023",
   "default_locale": "en",
-  "host_permissions": [
-    "https://mkp.gem.gov.in/*"
-  ],
+  "host_permissions": ["https://mkp.gem.gov.in/*"],
   "action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://mkp.gem.gov.in/*"
-      ],
-      "js": [
-        "popup.js"
-      ]
+      "matches": ["https://mkp.gem.gov.in/*"],
+      "js": ["popup.js"]
     }
   ],
   "permissions": [
     "activeTab",
+    "scripting",
     "tabs",
     "chrome://favicon/",
     "http://*/*",

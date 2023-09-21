@@ -45,3 +45,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// Function to add the button
+function addCustomButton() {
+    var newButton = document.createElement("button");
+    newButton.textContent = "Compare";
+
+    newButton.style.position = "fixed";
+    newButton.style.top = "10px";
+    newButton.style.right = "10px";
+    newButton.style.zIndex = "9999";
+
+    document.body.appendChild(newButton);
+}
+
+// Run the addCustomButton function when the page loads
+window.addEventListener("load", addCustomButton);
