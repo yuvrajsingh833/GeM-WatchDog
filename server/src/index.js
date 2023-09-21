@@ -92,12 +92,19 @@ const getAmazonInfo = async (product, category) => {
         .querySelector(
           "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.a-spacing-top-micro > div > span:nth-child(2) > a > span"
         )?.innerHTML;
+
+      const link = ele.children
+        .item(0)
+        .children.item(i)
+        .querySelector(
+          "div > div > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a"
+        )?.href;
       data.push({
         name,
         price,
         rating,
         noOfRatings,
-        url: window.location.href,
+        link,
       });
     }
     return data;
