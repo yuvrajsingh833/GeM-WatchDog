@@ -129,9 +129,7 @@ app.post("/get-info", async (req, res) => {
     res.json({ data: [] });
     return;
   }
-  await database
-    .collection("products")
-    .createIndex({ name: 1 }, { unique: true });
+  await database.collection("products").deleteMany({});
   await database.collection("products").insertMany(data);
   res.json({ data });
 });
