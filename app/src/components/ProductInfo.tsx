@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react';
-import ProductCard from './ProductCard';
+import { useState, ChangeEvent } from "react";
+import ProductCard from "./ProductCard";
 
 interface ProductInfo {
   name: string;
@@ -17,7 +17,7 @@ interface ProductInfoResponse {
 
 function ProductInfo() {
   const [productInfo, setProductInfo] = useState<ProductInfo[] | null>(null);
-  const [customUrl, setCustomUrl] = useState<string>(''); // Input for the custom URL
+  const [customUrl, setCustomUrl] = useState<string>(""); // Input for the custom URL
 
   const handleCustomUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCustomUrl(e.target.value);
@@ -25,7 +25,7 @@ function ProductInfo() {
 
   const extractCategoryAndProduct = (url: string) => {
     // Split the URL by '/'
-    const urlParts = url.split('/');
+    const urlParts = url.split("/");
 
     // Ensure that there are at least 5 parts in the URL (to avoid out-of-bounds errors)
     if (urlParts.length >= 5) {
@@ -36,16 +36,16 @@ function ProductInfo() {
       // Make the API call with category and product
       fetchData(category, product);
     } else {
-      console.error('Invalid URL format');
+      console.error("Invalid URL format");
     }
   };
 
   const fetchData = async (category: string, product: string) => {
     try {
-      const response = await fetch('http://localhost:8000/get-info', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/get-info", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ product, category }),
       });
@@ -54,10 +54,10 @@ function ProductInfo() {
         const data: ProductInfoResponse = await response.json();
         setProductInfo(data.data);
       } else {
-        console.error('Error fetching data');
+        console.error("Error fetching data");
       }
     } catch (error) {
-      console.error('Error fetching data', error);
+      console.error("Error fetching data", error);
     }
   };
 
