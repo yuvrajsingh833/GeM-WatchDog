@@ -10,9 +10,7 @@ interface MyResponsiveLineProps {
   data: Serie[];
 }
 
-export const MyResponsiveLine: React.FC<MyResponsiveLineProps> = ({
-  data
-}) => (
+export const MyResponsiveLine: React.FC<MyResponsiveLineProps> = ({ data }) => (
   <ResponsiveLine
     data={data}
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
