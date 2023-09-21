@@ -1,49 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const productInput = document.getElementById("productInput");
-  const categoryInput = document.getElementById("categoryInput");
-  const makeRequestButton = document.getElementById("makeRequest");
-  const resultDiv = document.getElementById("result");
+    function extractCategoryAndProduct(url) {
+        const urlParts = url.split("/");
+        if (urlParts.length >= 4) {
+            const category = urlParts[3];
+            const product = urlParts[4].split("-").join(" ");
+            console.log(category, product);
+            return { category, product };
+        }
+        console.log("Category or product not found in the URL.");
+        return { category: "", product: "" };
+    }
 
-  makeRequestButton.addEventListener("click", function () {
-    const product = productInput.value;
-    const category = categoryInput.value;
+    const resultDiv = document.getElementById("result");
 
-    const requestBody = {
-      product,
-      category,
-    };
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const currentTab = tabs[0];
+        const tabUrl = currentTab.url;
 
-    fetch("http://localhost:8000/get-info", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        resultDiv.textContent = JSON.stringify(data, null, 2);
-        console.log("API Result:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        resultDiv.textContent =
-          "Error occurred. Check the console for details.";
-      });
-  });
+        const { category, product } = extractCategoryAndProduct(tabUrl);
+
+        if (category && product) {
+            const requestBody = {
+                product,
+                category,
+            };
+
+            fetch("http://localhost:8000/get-info", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestBody),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    resultDiv.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    resultDiv.textContent = "Error occurred. Check the console for details.";
+                });
+        } else {
+            resultDiv.textContent = "Category or product not found in the URL.";
+        }
+    });
 });
 
 // Function to add the button
 function addCustomButton() {
-  var newButton = document.createElement("button");
-  newButton.textContent = "Compare";
+    var newButton = document.createElement("button");
+    newButton.textContent = "Compare";
 
-  newButton.style.position = "fixed";
-  newButton.style.top = "10px";
-  newButton.style.right = "10px";
-  newButton.style.zIndex = "9999";
+    newButton.style.position = "fixed";
+    newButton.style.top = "10px";
+    newButton.style.right = "10px";
+    newButton.style.zIndex = "9999";
 
-  document.body.appendChild(newButton);
+    document.body.appendChild(newButton);
 }
 
 // Run the addCustomButton function when the page loads
