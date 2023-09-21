@@ -97,6 +97,7 @@ const getAmazonInfo = async (product, category) => {
         price,
         rating,
         noOfRatings,
+        url: window.location.href,
       });
     }
     return data;
@@ -115,7 +116,7 @@ app.post("/get-info", async (req, res) => {
   const { product, category } = req.body;
   let amazonData = await getAmazonInfo(product, category);
   amazonData = amazonData.filter((item) => {
-    if (Object.keys(item).length === 0 && item.constructor === Object) {
+    if (Object.keys(item).length <= 1 && item.constructor === Object) {
       return false;
     }
     return true;
@@ -128,6 +129,9 @@ app.post("/get-info", async (req, res) => {
     res.json({ data: [] });
     return;
   }
+  await database
+    .collection("products")
+    .createIndex({ name: 1 }, { unique: true });
   await database.collection("products").insertMany(data);
   res.json({ data });
 });
