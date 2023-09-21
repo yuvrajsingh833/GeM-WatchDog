@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "DOM Accessor",
+  "name": "SIH 2023",
   "version": "1.0",
   "description": "SIH 2023",
   "default_locale": "en",
@@ -16,11 +16,12 @@
         "https://mkp.gem.gov.in/*"
       ],
       "js": [
-        "content.js"
+        "popup.js"
       ]
     }
   ],
   "permissions": [
+    "activeTab",
     "tabs",
     "chrome://favicon/",
     "http://*/*",
