@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    function extractCategoryAndProduct(url) {
-        const urlParts = url.split("/");
-        if (urlParts.length >= 4) {
-            const category = urlParts[3];
-            const product = urlParts[4].split("-").join(" ");
-            console.log(category, product);
-            return { category, product };
-        }
-        console.log("Category or product not found in the URL.");
-        return { category: "", product: "" };
+  function extractCategoryAndProduct(url) {
+    const urlParts = url.split("/");
+    if (urlParts.length >= 4) {
+      const category = urlParts[3];
+      const product = urlParts[4].split("-").join(" ");
+      console.log(category, product);
+      return { category, product };
     }
+    console.log("Category or product not found in the URL.");
+    return { category: "", product: "" };
+  }
+
 
     const resultDiv = document.getElementById("result");
 
@@ -83,15 +84,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to add the button
 function addCustomButton() {
-    var newButton = document.createElement("button");
-    newButton.textContent = "Compare";
+  var targetElement = document.querySelector(
+    "#pricing_summary > div.add-to-cart-price"
+  );
 
-    newButton.style.position = "fixed";
-    newButton.style.top = "10px";
-    newButton.style.right = "10px";
-    newButton.style.zIndex = "9999";
+  if (targetElement) {
+    var specificDiv = targetElement.querySelector(
+      "#pricing_summary > div.add-to-cart-price > div.discount_gola"
+    );
 
-    document.body.appendChild(newButton);
+    if (specificDiv) {
+      var newButton = document.createElement("button");
+      newButton.textContent = "Compare";
+
+      // Insert the button after the specific div
+      specificDiv.parentNode.insertBefore(newButton, specificDiv.nextSibling);
+    }
+  }
 }
 
 // Run the addCustomButton function when the page loads
