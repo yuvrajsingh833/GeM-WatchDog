@@ -5,12 +5,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>DOM Accessor Extension</title>
+  <script src="popup.js"></script>
 </head>
 
 <body>
-  <h1>DOM Accessor Extension</h1>
-  <p>This extension allows you to access the DOM of the current page.</p>
-  <script type="text/javascript" src="content.js"></script>
+  <h1>Make an API Request</h1>
+  <label for="productInput">Product:</label>
+  <input type="text" id="productInput"><br>
+  <label for="categoryInput">Category:</label>
+  <input type="text" id="categoryInput"><br>
+  <button id="makeRequest">Make Request</button>
+  <div id="result"></div>
 </body>
 
 </html>
