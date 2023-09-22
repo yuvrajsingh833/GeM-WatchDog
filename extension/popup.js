@@ -74,7 +74,12 @@ function addCustomButton() {
       var newButton = document.createElement("button");
       newButton.textContent = "Compare";
 
-      // Insert the button after the specific div
+      newButton.addEventListener("click", function() {
+        const href = `http://localhost:5173/?url=${window.location.href}`;
+        window.open(href, "_blank");
+    });
+
+    // Insert the button after the specific div
       specificDiv.parentNode.insertBefore(newButton, specificDiv.nextSibling);
     }
   }
