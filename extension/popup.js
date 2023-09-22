@@ -65,24 +65,24 @@ function loadAndDisplayData(url) {
 // Function to add a custom button to the page
 function addCustomButton() {
   var targetElement = document.querySelector(
-    "#pricing_summary > div.add-to-cart-price"
+    "#pricing_summary > div.add-to-cart-price",
   );
 
   if (targetElement) {
     var specificDiv = targetElement.querySelector(
-      "#pricing_summary > div.add-to-cart-price > div.discount_gola"
+      "#pricing_summary > div.add-to-cart-price > div.discount_gola",
     );
 
     if (specificDiv) {
       var newButton = document.createElement("button");
       newButton.textContent = "Compare";
 
-      newButton.addEventListener("click", function() {
+      newButton.addEventListener("click", function () {
         const href = `http://localhost:5173/?url=${window.location.href}`;
         window.open(href, "_blank");
-    });
+      });
 
-    // Insert the button after the specific div
+      // Insert the button after the specific div
       specificDiv.parentNode.insertBefore(newButton, specificDiv.nextSibling);
     }
   }
