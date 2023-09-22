@@ -2,6 +2,7 @@ import { useState, ChangeEvent, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { MyResponsiveLine } from "../Analytics/MyResponsiveLine";
 import { MyResponsivePie } from "../Analytics/MyResponsivePie";
+import DropDown from "./DropDown";
 
 interface ProductInfo {
   name: string;
@@ -33,6 +34,9 @@ function ProductInfo({ url }: { url: string | null }) {
   const [productInfo, setProductInfo] = useState<ProductInfo[] | null>(null);
   const [gemInfo, setGemInfo] = useState<GEMProductInfo | null>(null);
   const [customUrl, setCustomUrl] = useState<string>(url ? url : "");
+  const [vendor, setVendor] = useState<string>("Amazon");
+
+  const listOfVendors: string[] = ["Amazon", "Flipkart"];
 
   const handleCustomUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCustomUrl(e.target.value);
@@ -154,6 +158,16 @@ function ProductInfo({ url }: { url: string | null }) {
       <h1 className="text-3xl font-semibold text-white bg-blue-500 p-2 mt-4 w-2/3 flex justify-center rounded-md shadow-md">
         Other Platform Product Information
       </h1>
+
+      <div className="mt-2 flex items-start justify-end w-2/3">
+        <DropDown
+          list={listOfVendors}
+          vendor={vendor}
+          setVendor={setVendor}
+          className="flex items-end"
+        />
+      </div>
+
       <div className="mt-4 w-1/2">
         <label htmlFor="customUrl" className="text-gray-700 font-bold">
           GEM Url:
@@ -173,6 +187,9 @@ function ProductInfo({ url }: { url: string | null }) {
         Get Info
       </button>
 
+      <div className="flex justify-start w-4/5">
+        <p className="text-4xl font-bold">{vendor}</p>
+      </div>
       <div className="flex justify-center w-3/4 mt-6">
         <div className="flex flex-col items-center justify-center gap-8">
           <div className="bg-white w-full rounded-lg p-3 mt-6 shadow-lg">
@@ -181,7 +198,7 @@ function ProductInfo({ url }: { url: string | null }) {
                 <h2 className="text-3xl font-semibold text-gray-500 mb-4">
                   Data from Other sources:
                 </h2>
-                <div className="max-h-[500px] overflow-y-auto no-scrollbar" >
+                <div className="max-h-[500px] overflow-y-auto no-scrollbar">
                   {productInfo?.map((product, index) => (
                     <ProductCard key={index} product={product} />
                   ))}
