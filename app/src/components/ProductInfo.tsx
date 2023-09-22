@@ -202,7 +202,7 @@ function ProductInfo({ url }: { url: string | null }) {
           <MyResponsiveLine
             name="Price Trend"
             data={productInfo?.map((prod) => {
-              const price = Number(prod.price.replace(",", ""));
+              const price = Number(prod.price?.replace(",", ""));
               console.log(price);
               const x: {
                 data: { x: string; y: number }[];
@@ -246,7 +246,7 @@ function ProductInfo({ url }: { url: string | null }) {
               data={productInfo?.map((prod) => {
                 const noOfRatings = Number(
                   prod?.noOfRatings
-                    .replace(",", "")
+                    ?.replace(",", "")
                     .replace("(", "")
                     .replace(")", "")
                 );
@@ -282,7 +282,7 @@ function ProductInfo({ url }: { url: string | null }) {
               data={productInfo?.map((prod) => {
                 const rating = Number(
                   prod?.rating
-                    .replace(",", "")
+                    ?.replace(",", "")
                     .replace("(", "")
                     .replace(")", "")
                 );
