@@ -107,7 +107,6 @@ function ProductInfo({ url }: { url: string | null }) {
     }
   }, [url]);
 
-  console.log(productInfo, gemInfo);
   return (
     <div className="min-h-screen w-full bg-gray-200 flex flex-col items-center justify-center p-10">
       {gemInfo && (
@@ -200,7 +199,6 @@ function ProductInfo({ url }: { url: string | null }) {
             name="Price Trend"
             data={productInfo?.map((prod) => {
               const price = Number(prod.price?.replace(",", ""));
-              console.log(price);
               const x: {
                 data: { x: string; y: number }[];
                 id: string;
@@ -283,7 +281,6 @@ function ProductInfo({ url }: { url: string | null }) {
                     .replace("(", "")
                     .replace(")", ""),
                 );
-                console.log(noOfRatings);
                 const x: {
                   data: { x: string; y: number }[];
                   id: string;
@@ -319,7 +316,6 @@ function ProductInfo({ url }: { url: string | null }) {
                     .replace("(", "")
                     .replace(")", ""),
                 );
-                console.log(rating);
                 const x: {
                   data: { x: string; y: number }[];
                   id: string;
