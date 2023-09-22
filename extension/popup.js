@@ -78,12 +78,12 @@ function loadAndDisplayData(url) {
 
 function addCustomButton() {
   var targetElement = document.querySelector(
-    "#pricing_summary > div.add-to-cart-price"
+    "#pricing_summary > div.add-to-cart-price",
   );
 
   if (targetElement) {
     var specificDiv = targetElement.querySelector(
-      "#pricing_summary > div.add-to-cart-price > div.discount_gola"
+      "#pricing_summary > div.add-to-cart-price > div.discount_gola",
     );
 
     if (specificDiv) {
@@ -94,7 +94,6 @@ function addCustomButton() {
         const href = `http://localhost:5173/?url=${window.location.href}`;
         window.open(href, "_blank");
       });
-
       specificDiv.parentNode.insertBefore(newButton, specificDiv.nextSibling);
     }
   }

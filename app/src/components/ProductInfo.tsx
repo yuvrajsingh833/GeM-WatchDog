@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { MyResponsiveLine } from "../Analytics/MyResponsiveLine";
+import { MyResponsivePie } from "../Analytics/MyResponsivePie";
 
 interface ProductInfo {
   name: string;
@@ -30,24 +31,20 @@ interface ProductInfoResponse {
 
 function ProductInfo({ url }: { url: string | null }) {
   const [productInfo, setProductInfo] = useState<ProductInfo[] | null>(null);
-  const [gemInfo, setGemInfo] = useState<GEMProductInfo | null>(null); // Data from GEM [Not used
-  const [customUrl, setCustomUrl] = useState<string>(url ? url : ""); // Input for the custom URL
+  const [gemInfo, setGemInfo] = useState<GEMProductInfo | null>(null);
+  const [customUrl, setCustomUrl] = useState<string>(url ? url : "");
 
   const handleCustomUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCustomUrl(e.target.value);
   };
 
   const extractCategoryAndProduct = (url: string) => {
-    // Split the URL by '/'
     const urlParts = url.split("/");
 
-    // Ensure that there are at least 5 parts in the URL (to avoid out-of-bounds errors)
     if (urlParts.length >= 5) {
-      // Extract the category and product
       const category = urlParts[3];
       const product = urlParts[4];
 
-      // Make the API call with category and product
       fetchDataForOtherSites(category, product);
       fetchDataForGEM();
     } else {
@@ -187,7 +184,7 @@ function ProductInfo({ url }: { url: string | null }) {
       )}
 
       <h1 className="text-3xl font-semibold text-black mt-10 rounded-md shadow-md">
-        Price Trend
+        Price Trend (Line Graph)
       </h1>
       <p className="text-2xl mb-4  font-semibold text-black mt-10 rounded-md shadow-md">
         Comparing the price of the product on different websites
@@ -219,6 +216,42 @@ function ProductInfo({ url }: { url: string | null }) {
                   x: web,
                   y: price * Math.random(),
                 });
+              });
+              return x;
+            })}
+          />
+        </div>
+      )}
+
+      <h1 className="text-3xl font-semibold text-black mt-10 rounded-md shadow-md">
+        Price Trend (Pie Graph)
+      </h1>
+      <p className="text-2xl mb-4  font-semibold text-black mt-10 rounded-md shadow-md">
+        Comparing the price of the product on different websites
+      </p>
+      {productInfo && (
+        <div
+          style={{
+            width: "900px",
+            height: "500px",
+          }}
+        >
+          <MyResponsivePie
+            data={productInfo?.map((prod) => {
+              const price = Number(prod.price?.replace(",", ""));
+              console.log(price);
+              const x: {
+                value: number;
+                id: string;
+                label: string;
+              } = {
+                value: price,
+                id: prod.name,
+                label: prod.name,
+              };
+              // random to for +ve or -ve 20%
+              ["amazon", "flipkart", "snapdeal"].forEach(() => {
+                x["value"] = price * Math.random();
               });
               return x;
             })}
