@@ -1,8 +1,13 @@
+function extractProductVariantID(url) {
+  const productID = url.match(/#variant_id=([^&]+)/);
+  if (productID && productID[1]) {
+    return productID[1];
+  }
+}
 function handleTabNavigation(details) {
   if (details.url && details.url.includes("mkp.gem.gov.in")) {
     console.log("Tab URL found:", details.url);
     const urlParts = new URL(details.url).pathname.split("/");
-
     if (urlParts.length >= 4) {
       console.log("Test");
       const category = urlParts[1];
@@ -21,10 +26,13 @@ function handleTabNavigation(details) {
       })
         .then((response) => response.json())
         .then((data) => {
-          chrome.storage.local.set({ data: JSON.stringify(data) }, function () {
-            console.log("Data has been stored in chrome.storage.");
+          const productID = extractProductVariantID(details.url);
+          const localData = {
+            [productID]: JSON.stringify(data),
+          };
+          chrome.storage.local.set(localData, function () {
+            console.log("Data has been stored in chrome.storage.", productID);
           });
-          // localStorage.setItem("data", JSON.stringify(data));
           chrome.runtime.sendMessage({
             type: "API_RESPONSE",
             responseData: data,
