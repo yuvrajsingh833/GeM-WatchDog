@@ -8,9 +8,13 @@ interface Serie {
 
 interface MyResponsiveLineProps {
   data: Serie[];
+  name: string;
 }
 
-export const MyResponsiveLine: React.FC<MyResponsiveLineProps> = ({ data }) => (
+export const MyResponsiveLine: React.FC<MyResponsiveLineProps> = ({
+  data,
+  name,
+}) => (
   <ResponsiveLine
     data={data}
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -29,7 +33,7 @@ export const MyResponsiveLine: React.FC<MyResponsiveLineProps> = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "transportation",
+      legend: name,
       legendOffset: 36,
       legendPosition: "middle",
     }}
