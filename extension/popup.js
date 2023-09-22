@@ -5,7 +5,10 @@ function extractProductVariantID(url) {
   }
 }
 
+// document.getElementById("hide").remove();
+
 function createTable(data) {
+  document.getElementById("hide").remove();
   const resultDiv = document.getElementById("result");
   resultDiv.innerHTML = "";
 
