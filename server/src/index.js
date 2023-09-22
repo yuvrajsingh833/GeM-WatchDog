@@ -34,7 +34,7 @@ const sites = {
     url: "https://www.amazon.in/",
   },
   flipkart: {
-    url: "https://www.flipkart.com/",
+    url: "https://www.flipkart.com/search?q=",
   },
   snapdeal: {
     url: "https://www.snapdeal.com/",
@@ -211,8 +211,103 @@ const getGEMData = async (link) => {
   }
 };
 
-const getFlipkartInfo = async (product, category) => {};
+const getFlipkartInfo = async (product) => {
+  const page = await browser.newPage();
+  const r = await page.goto(sites["flipkart"].url + product);
+
+  if (!r.ok()) {
+    console.log("Error in opening Flipkart");
+    return [];
+  }
+
+  //await page.waitForNavigation();
+
+  const data = await page.evaluate(() => {
+    const dataa = [];
+    const parent = document.querySelector(
+      "#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2)",
+    );
+
+    const len = parent.children.length;
+    var index = 1;
+    while (index < len - 2) {
+      const name = parent.children
+        .item(index)
+        .querySelector(
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
+            index + 1
+          }) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div._4rR01T`,
+        )?.innerHTML;
+
+      const price = parent.children
+        .item(index)
+        .querySelector(
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
+            index + 1
+          }) > div > div > div > a > div._3pLy-c.row > div.col.col-5-12.nlI3QM > div._3tbKJL > div > div`,
+        )?.innerHTML;
+      index++;
+
+      var rating = parent.children
+        .item(index - 1)
+        .querySelector(
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy-> span > div`,
+        )?.innerHTML;
+
+        rating = (rating.substring(0, 3));
+
+      const noofRating = parent.children
+        .item(index - 1)
+        .querySelector(
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy- > span._2_R_DZ > span > span:nth-child(1) > span `,
+        );
+
+      const link = parent.children
+        .item(index)
+        .querySelector(
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
+            index + 1
+          }) > div > div > div > a`,
+        );
+
+      var hrefMatch;
+
+      if (link) {
+        const hrefPattern = /href="([^"]+)"/;
+
+        hrefMatch = link.outerHTML.match(hrefPattern);
+
+        if (hrefMatch && hrefMatch.length > 1) {
+          const hrefValue = hrefMatch[1];
+          hrefMatch = "https://flipkart.com" + hrefValue;
+        }
+      }
+
+      dataa.push({
+        name,
+        price,
+        rating,
+        noofRating,
+        hrefMatch,
+      });
+    }
+
+    return dataa;
+  });
+
+  await page.close();
+
+  console.log(data);
+
+  return data;
+};
 const getSnapdealInfo = async (product, category) => {};
+
+app.post("/get-flipkart", async (req, res) => {
+  const { product } = req.body;
+  const resp = await getFlipkartInfo(product);
+  console.log(resp);
+});
 
 app.post("/get-other-ecommerce-info", async (req, res) => {
   const { product, category } = req.body;
