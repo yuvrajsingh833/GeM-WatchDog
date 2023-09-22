@@ -1,88 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-  function extractCategoryAndProduct(url) {
-    const urlParts = url.split("/");
-    if (urlParts.length >= 4) {
-      const category = urlParts[3];
-      const product = urlParts[4].split("-").join(" ");
-      console.log(category, product);
-      return { category, product };
-    }
-    console.log("Category or product not found in the URL.");
-    return { category: "", product: "" };
-  }
+function onLoad() {
+  addCustomButton();
 
-  const resultDiv = document.getElementById("result");
+  chrome.storage.local.get(["data"], function (result) {
+    const data = JSON.parse(result.data);
 
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    const currentTab = tabs[0];
-    const tabUrl = currentTab.url;
+    const resultDiv = document.getElementById("result");
 
-    const { category, product } = extractCategoryAndProduct(tabUrl);
+    resultDiv.innerHTML = "";
 
-    if (category && product) {
-      const requestBody = {
-        product,
-        category,
-      };
+    const table = document.createElement("table");
+    table.classList.add("product-table");
 
-      fetch("http://localhost:8000/get-other-ecommerce-info", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          resultDiv.innerHTML = "";
+    const tableHeader = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    const headers = ["Name", "Price", "Rating", "Number of Ratings"];
 
-          const table = document.createElement("table");
-          table.classList.add("product-table");
+    headers.forEach((headerText) => {
+      const th = document.createElement("th");
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
 
-          const tableHeader = document.createElement("thead");
-          const headerRow = document.createElement("tr");
-          const headers = ["Name", "Price", "Rating", "Number of Ratings"];
+    tableHeader.appendChild(headerRow);
+    table.appendChild(tableHeader);
 
-          headers.forEach((headerText) => {
-            const th = document.createElement("th");
-            th.textContent = headerText;
-            headerRow.appendChild(th);
-          });
+    const tableBody = document.createElement("tbody");
 
-          tableHeader.appendChild(headerRow);
-          table.appendChild(tableHeader);
+    data.data.forEach((item) => {
+      const row = document.createElement("tr");
+      const keys = ["name", "price", "rating", "noOfRatings"];
 
-          const tableBody = document.createElement("tbody");
+      keys.forEach((key) => {
+        const cell = document.createElement("td");
+        cell.textContent = item[key];
+        row.appendChild(cell);
+      });
 
-          data.data.forEach((item) => {
-            const row = document.createElement("tr");
-            const keys = ["name", "price", "rating", "noOfRatings"];
+      tableBody.appendChild(row);
+    });
 
-            keys.forEach((key) => {
-              const cell = document.createElement("td");
-              cell.textContent = item[key];
-              row.appendChild(cell);
-            });
+    table.appendChild(tableBody);
 
-            tableBody.appendChild(row);
-          });
-
-          table.appendChild(tableBody);
-
-          resultDiv.appendChild(table);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          resultDiv.textContent =
-            "Error occurred. Check the console for details.";
-        });
-    } else {
-      resultDiv.textContent = "Category or product not found in the URL.";
-    }
+    resultDiv.appendChild(table);
   });
-});
+}
 
-// Function to add the button
+// Function to add the button on the page
 function addCustomButton() {
   var targetElement = document.querySelector(
     "#pricing_summary > div.add-to-cart-price",
@@ -104,4 +67,54 @@ function addCustomButton() {
 }
 
 // Run the addCustomButton function when the page loads
-window.addEventListener("load", addCustomButton);
+window.addEventListener("load", onLoad);
+
+// Function to handle messages from the background.js
+function handleMessage(message) {
+  if (message.type === "API_RESPONSE") {
+    console.log("Received API data in popup:", message.responseData);
+    let data = message.responseData;
+
+    const resultDiv = document.getElementById("result");
+
+    resultDiv.innerHTML = "";
+
+    const table = document.createElement("table");
+    table.classList.add("product-table");
+
+    const tableHeader = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    const headers = ["Name", "Price", "Rating", "Number of Ratings"];
+
+    headers.forEach((headerText) => {
+      const th = document.createElement("th");
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+
+    tableHeader.appendChild(headerRow);
+    table.appendChild(tableHeader);
+
+    const tableBody = document.createElement("tbody");
+
+    data.data.forEach((item) => {
+      const row = document.createElement("tr");
+      const keys = ["name", "price", "rating", "noOfRatings"];
+
+      keys.forEach((key) => {
+        const cell = document.createElement("td");
+        cell.textContent = item[key];
+        row.appendChild(cell);
+      });
+
+      tableBody.appendChild(row);
+    });
+
+    table.appendChild(tableBody);
+
+    resultDiv.appendChild(table);
+  }
+}
+
+// Add a listener to handle messages from the background.js
+chrome.runtime.onMessage.addListener(handleMessage);
