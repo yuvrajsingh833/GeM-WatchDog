@@ -35,6 +35,8 @@ function loadAndDisplayData(url) {
 
       const tableBody = document.createElement("tbody");
 
+      console.log(data.data[0]);
+
       data.data.forEach((item) => {
         const row = document.createElement("tr");
         const keys = ["name", "price", "rating", "noOfRatings"];
@@ -42,6 +44,23 @@ function loadAndDisplayData(url) {
         keys.forEach((key) => {
           const cell = document.createElement("td");
           cell.textContent = item[key];
+          cell.addEventListener("click", function () {
+            const href = item.link;
+            window.open(href, "_blank");
+          });
+
+          cell.addEventListener("mouseover", () => {
+            // Change cursor style on hover
+            cell.style.cursor = "pointer";
+            cell.style.textDecoration = 'underline';
+          });
+
+          cell.addEventListener("mouseout", () => {
+            // Restore cursor and background color when the mouse leaves the element
+            cell.style.cursor = "default";
+            cell.style.textDecoration = 'none';
+          });
+
           row.appendChild(cell);
         });
 
@@ -59,12 +78,12 @@ function loadAndDisplayData(url) {
 
 function addCustomButton() {
   var targetElement = document.querySelector(
-    "#pricing_summary > div.add-to-cart-price",
+    "#pricing_summary > div.add-to-cart-price"
   );
 
   if (targetElement) {
     var specificDiv = targetElement.querySelector(
-      "#pricing_summary > div.add-to-cart-price > div.discount_gola",
+      "#pricing_summary > div.add-to-cart-price > div.discount_gola"
     );
 
     if (specificDiv) {
