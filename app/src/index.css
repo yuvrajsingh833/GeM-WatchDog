@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.no-scrollbar::-webkit-scrollbar {
+  /* make it a thin blue scrollbar */
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+/* thumb itself */
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(177, 181, 182);
+  border-radius: 20px;
+  border: 3px solid #f5f5f5;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  border-radius: 20px;
+}
+
+.no-scrollbar::-webkit-scrollbar-corner {
+  background-color: #f5f5f5;
+}
+
+.no-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(120, 120, 120) #f5f5f5;
+}

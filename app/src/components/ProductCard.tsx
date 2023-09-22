@@ -17,7 +17,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="h-52 bg-white border rounded-lg shadow-lg p-4 m-4">
-      <h3 className="text-xl font-semibold mb-2">
+      <h3 className="text-xl font-medium mb-2">
         {product.name.slice(0, 100)}
       </h3>
       <p className="text-gray-600">Price: {product.price}</p>

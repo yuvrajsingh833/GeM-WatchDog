@@ -1,25 +1,51 @@
+h1 {
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+  color: #0074d9;
+}
+
+body {
+  background-color: #edf2f7;
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.main {
+  padding: 10px;
+}
+
 .product-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #000;
 }
 
 .product-table th,
 .product-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
+  border: 1px solid #ddd;
+  padding: 12px;
   text-align: left;
 }
 
 .product-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+  background-color: #0074d9; /* Sky Blue background for headers */
+  color: #fff; /* White text color for headers */
 }
 
-.product-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+.product-table tr:nth-child(even) {
+  background-color: #e5f0ff; /* Lighter sky blue for even rows */
 }
 
-.product-table tbody tr:hover {
-  background-color: #e0e0e0;
+.product-table tr:nth-child(odd) {
+  background-color: #d6e7fd; /* Lighter sky blue for even rows */
+}
+
+.product-table tr:hover {
+  background-color: #b3d1ff; /* Slightly darker sky blue for hover effect */
 }
