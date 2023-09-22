@@ -12,7 +12,7 @@ function loadAndDisplayData(url) {
   // Retrieve data from local storage using the product ID
   chrome.storage.local.get([productID], function (result) {
     const jsonData = result[productID];
-    console.log("Retrieved data from local storage:", jsonData);
+    // console.log("Retrieved data from local storage:", jsonData);
     if (jsonData) {
       const data = JSON.parse(jsonData);
 
