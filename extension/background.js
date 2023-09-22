@@ -4,6 +4,17 @@ function extractProductVariantID(url) {
     return productID[1];
   }
 }
+
+function trimAndCleanString(inputString) {
+  // Remove newlines and extra whitespace
+  let cleanedString = inputString.replace(/\n/g, '').replace(/\s{2,}/g, ' ').trim();
+
+  // Remove HTML tags and their contents
+  cleanedString = cleanedString.replace(/<[^>]*>/g, '');
+
+  return cleanedString;
+}
+
 function handleTabNavigation(details) {
   if (details.url && details.url.includes("mkp.gem.gov.in")) {
     console.log("Tab URL found:", details.url);
@@ -11,32 +22,55 @@ function handleTabNavigation(details) {
     if (urlParts.length >= 4) {
       console.log("Test");
       const category = urlParts[1];
-      const product = urlParts[2].split("-").join(" ");
-      console.log("Parsed category and product:", category, product);
-      const requestBody = {
-        product,
-        category,
-      };
-      fetch("http://localhost:8000/get-other-ecommerce-info", {
+      fetch("http://localhost:8000/get-gem-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify({
+          link: details.url,
+        }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          const productID = extractProductVariantID(details.url);
-          const localData = {
-            [productID]: JSON.stringify(data),
-          };
-          chrome.storage.local.set(localData, function () {
-            console.log("Data has been stored in chrome.storage.", productID);
-          });
-          chrome.runtime.sendMessage({
-            type: "API_RESPONSE",
-            responseData: data,
-          });
+        .then((gemData) => {
+          console.log("GEM API Response:", gemData);
+
+          // Check if gemData contains the expected product name
+          if (gemData && gemData.data && gemData.data.productName) {
+            // Extract the text content from the desired elements
+            const product = trimAndCleanString(gemData.data.productName);
+
+            const requestBody = {
+              product: product,
+              category,
+            };
+            console.log("Request body:", requestBody)
+            fetch("http://localhost:8000/get-other-ecommerce-info", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                const productID = extractProductVariantID(details.url);
+                const localData = {
+                  [productID]: JSON.stringify(data),
+                };
+                chrome.storage.local.set(localData, function () {
+                  console.log(
+                    "Data has been stored in chrome.storage.",
+                    productID,
+                  );
+                });
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          } else {
+            console.error("GEM API did not return the expected product name.");
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
