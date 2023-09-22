@@ -65,7 +65,7 @@ function ProductInfo({ url }: { url: string | null }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ product, category }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -248,7 +248,7 @@ function ProductInfo({ url }: { url: string | null }) {
                   prod?.noOfRatings
                     ?.replace(",", "")
                     .replace("(", "")
-                    .replace(")", "")
+                    .replace(")", ""),
                 );
                 console.log(noOfRatings);
                 const x: {
@@ -284,7 +284,7 @@ function ProductInfo({ url }: { url: string | null }) {
                   prod?.rating
                     ?.replace(",", "")
                     .replace("(", "")
-                    .replace(")", "")
+                    .replace(")", ""),
                 );
                 console.log(rating);
                 const x: {

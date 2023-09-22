@@ -6,17 +6,14 @@ function extractProductVariantID(url) {
 }
 
 function loadAndDisplayData(url) {
-  // Extract product variant ID from the current URL
   const productID = extractProductVariantID(url);
 
-  // Retrieve data from local storage using the product ID
   chrome.storage.local.get([productID], function (result) {
     const jsonData = result[productID];
     // console.log("Retrieved data from local storage:", jsonData);
     if (jsonData) {
       const data = JSON.parse(jsonData);
 
-      // Update the webpage with the retrieved data
       const resultDiv = document.getElementById("result");
       resultDiv.innerHTML = "";
 
@@ -74,12 +71,11 @@ function addCustomButton() {
       var newButton = document.createElement("button");
       newButton.textContent = "Compare";
 
-      newButton.addEventListener("click", function() {
+      newButton.addEventListener("click", function () {
         const href = `http://localhost:5173/?url=${window.location.href}`;
         window.open(href, "_blank");
-    });
+      });
 
-    // Insert the button after the specific div
       specificDiv.parentNode.insertBefore(newButton, specificDiv.nextSibling);
     }
   }
@@ -88,9 +84,8 @@ function addCustomButton() {
 window.addEventListener("load", function () {
   addCustomButton();
 
-  // Get the current tab's URL and pass it to loadAndDisplayData
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const currentURL = tabs[0].url;
-    loadAndDisplayData(currentURL); // Load and display data when the page loads
+    loadAndDisplayData(currentURL);
   });
 });
