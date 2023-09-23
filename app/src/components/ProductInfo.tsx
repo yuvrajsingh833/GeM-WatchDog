@@ -109,7 +109,7 @@ function ProductInfo({ url }: { url: string | null }) {
     if (url) {
       extractCategoryAndProduct(url);
     }
-  }, [url, extractCategoryAndProduct]);
+  }, [url]);
 
   return (
     <div className="min-h-screen w-full bg-gray-200 flex flex-col items-center justify-center p-10">
