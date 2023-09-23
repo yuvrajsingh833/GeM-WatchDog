@@ -62,7 +62,7 @@ const getAmazonInfo = async (product, category) => {
 
   const data = await page.evaluate(() => {
     const ele = document.querySelector(
-      "#search > div.s-desktop-width-max.s-desktop-content.s-wide-grid-style-t1.s-opposite-dir.s-wide-grid-style.sg-row > div.sg-col-20-of-24.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section",
+      "#search > div.s-desktop-width-max.s-desktop-content.s-wide-grid-style-t1.s-opposite-dir.s-wide-grid-style.sg-row > div.sg-col-20-of-24.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section"
     );
     const productsLength = ele.children.item(0).children.length;
     const startLength = 6;
@@ -74,7 +74,7 @@ const getAmazonInfo = async (product, category) => {
         .item(0)
         .children.item(i)
         .querySelector(
-          "div > div > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a > span",
+          "div > div > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a > span"
         )?.innerHTML;
 
       if (!name) {
@@ -82,35 +82,35 @@ const getAmazonInfo = async (product, category) => {
           .item(0)
           .children.item(i)
           .querySelector(
-            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > h2 > a > span",
+            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > h2 > a > span"
           )?.innerHTML;
 
         const price = ele.children
           .item(0)
           .children.item(i)
           .querySelector(
-            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-whole",
+            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-whole"
           )?.innerHTML;
 
         const rating = ele.children
           .item(0)
           .children.item(i)
           .querySelector(
-            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(2) > div > span:nth-child(2) > a > span",
+            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(2) > div > span:nth-child(2) > a > span"
           )?.innerHTML;
 
         const noOfRatings = ele.children
           .item(0)
           .children.item(i)
           .querySelector(
-            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(2) > div > span:nth-child(2) > a > span",
+            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(2) > div > span:nth-child(2) > a > span"
           )?.innerHTML;
 
         const link = ele.children
           .item(0)
           .children.item(i)
           .querySelector(
-            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > h2 > a",
+            "div > div > div > div > div > div > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > h2 > a"
           )?.href;
 
         data.push({
@@ -127,28 +127,28 @@ const getAmazonInfo = async (product, category) => {
         .item(0)
         .children.item(i)
         .querySelector(
-          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20.sg-col-4-of-24 > div > div.a-section.a-spacing-none.a-spacing-top-micro.puis-price-instructions-style > div.a-row.a-size-base.a-color-base > a > span > span:nth-child(2) > span.a-price-whole",
+          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20.sg-col-4-of-24 > div > div.a-section.a-spacing-none.a-spacing-top-micro.puis-price-instructions-style > div.a-row.a-size-base.a-color-base > a > span > span:nth-child(2) > span.a-price-whole"
         )?.innerHTML;
 
       const rating = ele.children
         .item(0)
         .children.item(i)
         .querySelector(
-          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.a-spacing-top-micro > div > span:nth-child(1) > span.a-size-base.puis-bold-weight-text",
+          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.a-spacing-top-micro > div > span:nth-child(1) > span.a-size-base.puis-bold-weight-text"
         )?.innerHTML;
 
       const noOfRatings = ele.children
         .item(0)
         .children.item(i)
         .querySelector(
-          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.a-spacing-top-micro > div > span:nth-child(2) > a > span",
+          "div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.a-spacing-top-micro > div > span:nth-child(2) > a > span"
         )?.innerHTML;
 
       const link = ele.children
         .item(0)
         .children.item(i)
         .querySelector(
-          "div > div > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a",
+          "div > div > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.sg-col-12-of-24.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a"
         )?.href;
       data.push({
         name,
@@ -177,17 +177,17 @@ const getGEMData = async (link) => {
     const data = await page.evaluate(() => {
       const productName = document.querySelector("#title > h1")?.innerHTML;
       const productPrice = document.querySelector(
-        "#pricing_summary > div.add-to-cart-price > div.our_price > span > span",
+        "#pricing_summary > div.add-to-cart-price > div.our_price > span > span"
       ).innerHTML;
       const sellerExcellence = document.querySelector(
-        "#other_sellers > div > div.seller-rating-tags > div > div > span",
+        "#other_sellers > div > div.seller-rating-tags > div > div > span"
       )?.innerHTML;
       const image = document.querySelector(
-        "#img-id-1 > span:nth-child(3) > img",
+        "#img-id-1 > span:nth-child(3) > img"
       )?.src;
 
       const availableProducts = document.querySelector(
-        "#in_stock > span > strong",
+        "#in_stock > span > strong"
       )?.innerText;
 
       const data = {
@@ -225,7 +225,7 @@ const getFlipkartInfo = async (product) => {
   const data = await page.evaluate(() => {
     const dataa = [];
     const parent = document.querySelector(
-      "#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2)",
+      "#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2)"
     );
 
     const len = parent.children.length;
@@ -236,7 +236,7 @@ const getFlipkartInfo = async (product) => {
         .querySelector(
           `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
             index + 1
-          }) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div._4rR01T`,
+          }) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div._4rR01T`
         )?.innerHTML;
 
       const price = parent.children
@@ -244,22 +244,22 @@ const getFlipkartInfo = async (product) => {
         .querySelector(
           `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
             index + 1
-          }) > div > div > div > a > div._3pLy-c.row > div.col.col-5-12.nlI3QM > div._3tbKJL > div > div`,
+          }) > div > div > div > a > div._3pLy-c.row > div.col.col-5-12.nlI3QM > div._3tbKJL > div > div`
         )?.innerHTML;
       index++;
 
       var rating = parent.children
         .item(index - 1)
         .querySelector(
-          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy-> span > div`,
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy-> span > div`
         )?.innerHTML;
 
-        rating = (rating.substring(0, 3));
+      rating = rating.substring(0, 3);
 
       const noofRating = parent.children
         .item(index - 1)
         .querySelector(
-          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy- > span._2_R_DZ > span > span:nth-child(1) > span `,
+          `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${index}) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div.gUuXy- > span._2_R_DZ > span > span:nth-child(1) > span `
         );
 
       const link = parent.children
@@ -267,7 +267,7 @@ const getFlipkartInfo = async (product) => {
         .querySelector(
           `#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(${
             index + 1
-          }) > div > div > div > a`,
+          }) > div > div > div > a`
         );
 
       var hrefMatch;
@@ -339,5 +339,5 @@ app.post("/get-gem-info", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3001, () =>
-  console.log(`Example app listening on port ${process.env.PORT}!`),
+  console.log(`Example app listening on port ${process.env.PORT}!`)
 );
