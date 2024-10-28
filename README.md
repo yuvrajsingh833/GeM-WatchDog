@@ -1,18 +1,11 @@
-# SIH 2023 - Gem Watchdog
+# Gem Watchdog
 
 ## Ministry of Commerce and Industries - Student Innovation
 
-**PS Code:** 1360
+
 
 **Problem Statement Title:** Price comparison of GeM products with other e-marketplaces
 
-**Team Name:** GEM Watchdog
-
-**Team Leader Name:** Shubham Singh
-
-**Institute Name:** VIT, Chennai
-
-**Theme Name:** Smart Automation
 
 ---
 
@@ -79,25 +72,6 @@ Welcome to GEM Watchdog, a groundbreaking solution aimed at revolutionizing the 
 
 ---
 
-## Team Information
-
-- **Team Leader:** Shubham Singh (Branch: Btech, Stream: CSE, Year: III)
-- **Team Member 1:** Kushagra Garg (Branch: Btech, Stream: CSE, Year: III)
-- **Team Member 2:** Geoffrey Anto Ignatius E (Branch: Btech, Stream: CSE, Year: III)
-- **Team Member 3:** Pranshu Aggarwal (Branch: Btech, Stream: CSE, Year: III)
-- **Team Member 4:** Chiranjeev Mishra (Branch: Btech, Stream: CSE, Year: III)
-- **Team Member 5:** Ekta Saraf (Branch: Btech, Stream: CSE, Year: III)
-
----
-
-## Team Mentor
-
-- **Team Mentor :** Dr. Sakthivel V
-  - **Category:** Academic
-  - **Expertise:** Blockchain
-  - **Domain Experience:** 2 years
-
----
 
 GEM Watchdog aims to enhance the GeM platform's efficiency, transparency, and user experience by providing valuable insights and data-driven recommendations to all stakeholders, ultimately facilitating better decision-making in the e-commerce ecosystem.
 
@@ -124,12 +98,11 @@ Follow the steps below to get a copy of the project up and running on your local
 2. **Clone the Repository**: Clone this repository to your local machine using the following command:
 
    ```
-   git clone https://github.com/Geoffrey-Anto/sih-2023
+   git clone https://github.com/yuvrajsingh833/GeM-WatchDog
    ```
 
    ```
-   cd sih-2023
-   ```
+
 
 ## Installation
 
@@ -172,11 +145,11 @@ This extension is not available on the Google Chrome Web Store. Follow these ins
 
 #### Load Unpacked: Chrome, MS Edge, or Brave (All Desktop)
 
-1. Download this repository as a ZIP-file from [Github](https://github.com/Geoffrey-Anto/sih-2023/archive/refs/heads/main.zip).
+1. Download this repository as a ZIP-file from [Github](https://github.com/yuvrajsingh833/GeM-WatchDog).
 
-2. Unzip the file to get a folder named `sih-2023`.
+2. Unzip the file to get a folder 
 
-3. Move the `sih-2023` folder to a permanent location on your computer (do not delete it after installation).
+3. Move to the folder to a permanent location on your computer (do not delete it after installation).
 
 4. Open your Chromium-based browser and go to the extensions page (`chrome://extensions`).
 
@@ -216,5 +189,3 @@ pnpm run dev
 The local server will be up and running on `http://localhost:8000`.
 
 Please make sure all components are installed and running correctly to utilize the Gem Watchdog project fully.
-
-_Disclaimer: This project is a student innovation developed as part of the Smart Automation theme for the Ministry of Commerce and Industries. It is not affiliated with or endorsed by GeM or any other e-commerce platform._
