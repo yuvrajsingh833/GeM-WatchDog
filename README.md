@@ -1,6 +1,6 @@
 # Gem Watchdog
 
-## Ministry of Commerce and Industries - Student Innovation
+## Ministry of Commerce and Industries 
 
 
 
